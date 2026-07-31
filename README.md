@@ -55,7 +55,7 @@ flowchart LR
 ```
 
 - `frontend/`: React 19, Vite, Material UI, Tailwind CSS và Redux Toolkit.
-- `phuong/`: Spring Boot, Spring Security, JWT, OAuth2 Client, JPA/Hibernate và scheduler.
+- `backend/`: Spring Boot, Spring Security, JWT, OAuth2 Client, JPA/Hibernate và scheduler.
 - `docker-compose.yml`: điều phối frontend, backend và MySQL trên mạng nội bộ riêng.
 - `mysql_data`: Docker volume giữ dữ liệu qua các lần khởi động lại.
 
@@ -119,7 +119,7 @@ Sao chép `.env.example` thành `.env`. File `.env` đã được Git bỏ qua �
 Backend yêu cầu JDK 17 và MySQL:
 
 ```bash
-cd phuong
+cd backend
 export DB_HOST=localhost DB_PORT=3306 DB_NAME=library_management
 export DB_USERNAME=root DB_PASSWORD=your_password
 ./mvnw spring-boot:run
@@ -139,7 +139,7 @@ Vite tự proxy API sang `http://localhost:5000`. Đặt `VITE_API_BASE_URL` tro
 
 ```bash
 # Backend
-cd phuong && ./mvnw clean package -DskipTests
+cd backend && ./mvnw clean package -DskipTests
 
 # Frontend
 cd frontend && npm run lint && npm run build
@@ -156,7 +156,7 @@ Stack đã được kiểm tra thực tế với MySQL 8.4: cả ba container đ
 ```text
 .
 ├── frontend/                 # React/Vite SPA và Nginx config
-├── phuong/                  # Spring Boot backend
+├── backend/                 # Spring Boot backend
 │   └── src/main/java/com/phuong/
 │       ├── controller/      # REST endpoints
 │       ├── service/         # Business logic
