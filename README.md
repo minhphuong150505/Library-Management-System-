@@ -156,6 +156,11 @@ Stack đã được kiểm tra thực tế với MySQL 8.4: cả ba container đ
 ```text
 .
 ├── frontend/                 # React/Vite SPA và Nginx config
+│   ├── src/Admin/            # Dashboard quản trị
+│   ├── src/components/       # Thành phần giao diện dùng chung
+│   ├── src/pages/            # Các màn hình người dùng
+│   ├── src/services/         # Tầng gọi API
+│   └── src/store/            # Redux Toolkit
 ├── backend/                 # Spring Boot backend
 │   └── src/main/java/com/phuong/
 │       ├── controller/      # REST endpoints
@@ -178,7 +183,7 @@ Stack đã được kiểm tra thực tế với MySQL 8.4: cả ba container đ
 | `2cb05d6` | Bổ sung React SPA và dashboard quản trị |
 | `2186975` | Docker hóa MySQL, Spring Boot và React/Nginx |
 | `b4aee92` | Đồng bộ thương hiệu, ảnh ứng dụng và tài liệu |
-| `a1d6de2` | Đổi tên module `phuong/` thành `backend/` |
+| `a1d6de2` | Chuẩn hóa tên module Spring Boot thành `backend/` |
 
 ---
 
