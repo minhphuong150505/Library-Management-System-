@@ -154,7 +154,7 @@ const SidebarDrawer = ({ isMobile, setMobileOpen, handleProfileMenuClose }) => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            ZoshBook
+            Phuong Library
           </Typography>
           <Typography
             variant="caption"
@@ -386,7 +386,7 @@ const SidebarDrawer = ({ isMobile, setMobileOpen, handleProfileMenuClose }) => {
             letterSpacing: 0.5,
           }}
         >
-          © 2026 ZoshBook. All rights reserved.
+          © 2026 Phuong Library. All rights reserved.
         </Typography>
       </Box>
     </Box>
