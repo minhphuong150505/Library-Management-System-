@@ -174,10 +174,11 @@ Stack đã được kiểm tra thực tế với MySQL 8.4: cả ba container đ
 
 | Commit | Nội dung |
 | --- | --- |
-| `5907228` | Chuyển đầy đủ backend sang namespace `com.phuong` |
-| `f1c9ba1` | Bổ sung React SPA và dashboard quản trị |
-| `9aedcc3` | Docker hóa MySQL, Spring Boot và React/Nginx |
-| Commit hiện tại | Đồng bộ thương hiệu, ảnh ứng dụng và tài liệu |
+| `800fe3a` | Chuyển đầy đủ backend sang namespace `com.phuong` |
+| `2cb05d6` | Bổ sung React SPA và dashboard quản trị |
+| `2186975` | Docker hóa MySQL, Spring Boot và React/Nginx |
+| `b4aee92` | Đồng bộ thương hiệu, ảnh ứng dụng và tài liệu |
+| `a1d6de2` | Đổi tên module `phuong/` thành `backend/` |
 
 ---
 
