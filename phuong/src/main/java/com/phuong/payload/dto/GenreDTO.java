@@ -1,34 +1,40 @@
 package com.phuong.payload.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+/**
+ * Data Transfer Object for Genre entity.
+ * Used for API requests and responses.
+ */
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class GenreDTO {
+
     private Long id;
 
-    @NotBlank(message = "Genre Code is Mandatory")
+    @NotBlank(message = "Genre code is mandatory")
+    @Size(min = 2, max = 50, message = "Genre code must be between 2 and 50 characters")
+    @Pattern(regexp = "^[A-Z_]+$", message = "Genre code must contain only uppercase letters and underscores")
     private String code;
 
-    @NotBlank(message = "genre Name is Mandatory")
+    @NotBlank(message = "Genre name is mandatory")
+    @Size(min = 2, max = 100, message = "Genre name must be between 2 and 100 characters")
     private String name;
 
-    @Size(max = 500, message = "description must not exceed 500 characters")
+    @Size(max = 500, message = "Description must not exceed 500 characters")
     private String description;
 
-    @Min(value = 0, message = "display over cannot be nagative")
+    @Min(value = 0, message = "Display order cannot be negative")
     private Integer displayOrder;
 
-    private Boolean active = true;
+    private Boolean active;
 
     private Long parentGenreId;
 
@@ -38,7 +44,8 @@ public class GenreDTO {
 
     private Long bookCount;
 
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
 
+    private LocalDateTime updatedAt;
 }
+

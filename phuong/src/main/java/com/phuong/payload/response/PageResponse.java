@@ -1,16 +1,18 @@
 package com.phuong.payload.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Generic paginated response wrapper
+ */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class PageResponse <T>{
+@AllArgsConstructor
+public class PageResponse<T> {
 
     private List<T> content;
     private int pageNumber;
@@ -21,3 +23,4 @@ public class PageResponse <T>{
     private boolean first;
     private boolean empty;
 }
+

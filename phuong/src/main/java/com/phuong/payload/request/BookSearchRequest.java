@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Request DTO for book search and filtering operations
+ */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookSearchRequest {
 
     private String searchTerm;
@@ -14,7 +17,7 @@ public class BookSearchRequest {
     private Boolean availableOnly;
     private Integer page = 0;
     private Integer size = 20;
-    private String sortBy = "createAt";
+    private String sortBy = "createdAt";
     private String sortDirection = "DESC";
-
 }
+

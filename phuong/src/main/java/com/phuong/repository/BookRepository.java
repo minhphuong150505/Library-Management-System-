@@ -1,8 +1,7 @@
 package com.phuong.repository;
 
 import com.phuong.modal.Book;
-import com.phuong.payload.dto.BookDTO;
-
+import com.phuong.modal.Genre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,35 +11,52 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for Book entity.
+ * Provides CRUD operations and custom query methods for searching and filtering books.
+ */
+@Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<Book> findByIsbn(String Isbn);
+    /**
+     * Find a book by ISBN
+     */
+    Optional<Book> findByIsbn(String isbn);
 
-    boolean existsByIsbn(String Isbn);
+    /**
+     * Check if a book exists with the given ISBN
+     */
+    boolean existsByIsbn(String isbn);
 
-    // book - java propraming
-    // java
-    @Query("select b from Book b where " +
-            "(:searchTerm is null or "+
-            "lower(b.title) like lower(concat ('%', :searchTerm,'%')) OR " +
-            "lower(b.author) like lower(concat ('%', :searchTerm,'%')) OR " +
-            "lower(b.isbn) like lower(concat ('%', :searchTerm,'%'))) OR " +
-            "(:genreId is null or b.genre.id = :genreId)AND " +
-            "(:availableOnly = false Or b.availableCopies = 0) AND " +
-            "b.active = true")
-    Page<Book> searchBookWithFilters(
-            @Param("searchTerm") String searchTerm,
-            @Param("genreId") Long genreId,
-            @Param("availableOnly") boolean availableOnly,
-            Pageable pageable
+
+    /**
+     * Advanced search with filters - search by title, author, ISBN and filter by genre
+     */
+    @Query("SELECT b FROM Book b WHERE " +
+           "(:searchTerm IS NULL OR " +
+           "LOWER(b.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           "LOWER(b.author) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           "LOWER(b.isbn) LIKE LOWER(CONCAT('%', :searchTerm, '%'))) AND " +
+           "(:genreId IS NULL OR b.genre.id = :genreId) AND " +
+           "(:availableOnly = false OR b.availableCopies > 0) AND " +
+           "b.active = true")
+    Page<Book> searchBooksWithFilters(
+        @Param("searchTerm") String searchTerm,
+        @Param("genreId") Long genreId,
+        @Param("availableOnly") boolean availableOnly,
+        Pageable pageable
     );
 
+
+    /**
+     * Count total active books
+     */
     long countByActiveTrue();
 
-    @Query("select count(b) from Book b Where b.availableCopies > 0 and b.active = true" )
+    /**
+     * Count available books
+     */
+    @Query("SELECT COUNT(b) FROM Book b WHERE b.availableCopies > 0 AND b.active = true")
     long countAvailableBooks();
-
-    @Query("select b from Book b " +
-            "where b.author = :author")
-    Optional<Book> getAllByAuthor(@Param("author") String author);
 }
+

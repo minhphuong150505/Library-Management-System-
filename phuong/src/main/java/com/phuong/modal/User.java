@@ -1,50 +1,73 @@
 package com.phuong.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.phuong.domain.AuthProvider;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.phuong.domain.UserRole;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "users")
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
-
+    @NotBlank(message = "fullName is mandatory")
     private String fullName;
+
+    @JsonIgnore
+    private String password;
+
+    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email should be valid")
+    private String email;
 
     private String phone;
 
-    private String role;
-
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private AuthProvider authProvider = AuthProvider.LOCAL;
 
     private String googleId;
 
     private String profileImage;
 
-    private String pasword;
+    @Column(nullable = false)
+    @NotNull(message = "Role is mandatory")
+    private UserRole role;
+
+    @Column(nullable = false)
+    private Boolean verified = false;
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     private LocalDateTime lastLogin;
 
-    @CreationTimestamp
-    private LocalDateTime createAt;
 
-    @UpdateTimestamp
-    private LocalDateTime updateAt;
+
 }
+
+
